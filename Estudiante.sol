@@ -48,9 +48,9 @@ contract Estudiante{
         }
     }
 
-    uint _promedio;
-    uint suma;
-    function promedio() public returns (uint){
+    function promedio() public view returns (uint){
+        uint _promedio;
+        uint suma;
         uint largoarray = materias.length;
         
         for(uint i=0; i<largoarray; i++){

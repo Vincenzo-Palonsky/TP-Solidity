@@ -7,14 +7,14 @@ contract Estudiante{
     string private _curso;
     mapping(string => uint) [4] private bimestres;
     address private _docente;
-    string [] private materias;
+    string [][] private materias;
     string [] private permitidos;
     
     constructor(string memory nombre_, string memory apellido_, string memory curso_){
         _nombre = nombre_;
         _apellido = apellido_;
         _curso = curso_;
-        permitidos.push(msg.sender);
+        _docente = msg.sender;
     }
 
     function apellido() public view returns (string memory){
@@ -29,19 +29,19 @@ contract Estudiante{
         return _curso;
     }
 
-    function set_nota_materias(string memory materia_, uint bimestre_, uint nota_) public{
-        require(msg.sender == permitidos[], "Solo el owner puede setear poderes");
+    function set_nota_materias(string memory materia_, uint bimestre_, uint nota_, string memory bimestreStr_) public{
+        require(msg.sender == _docente, "Solo el owner puede setear poderes");
         bimestre_ = bimestre_-1;
-        bimestres[bimestre_[materia_]] = nota_;
-        materias.push(materia_);
+        bimestres[bimestre_][materia_] = nota_;
+        materias[bimestre_].push(materia_);
     }
 
     function nota_materia(string memory materia_, uint bimestre_) public view returns (uint){
-        return bimestres[bimestres[materia_]];
+        return bimestres[bimestre_][materia_];
     }
 
     function aprobo(string memory materia_, uint bimestre_) public view returns (bool){
-        if(bimestres[bimestres[materia_]]>=60){
+        if(bimestres[bimestre_][materia_]>=60){
             return true;
         }
         else{
@@ -52,15 +52,14 @@ contract Estudiante{
     function promedio() public view returns (uint){
         uint _promedio;
         uint suma;
-        uint largoarray = materias.length;
         
         for(uint i=0; i<4; i++){
-            for(uint j=0; j<largoarray; j++){
-                suma = suma + notas_materias[materias[j]];
+            for(uint j=0; j<materias.length; j++){
+                suma = suma + bimestres[i][materias[j]];
             }
         }
         
-        _promedio = suma/largoarray;
+        _promedio = suma/(materias.length*4);
         return _promedio;
     }
 }

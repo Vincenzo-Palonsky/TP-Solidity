@@ -7,7 +7,6 @@ contract Estudiante{
     string private _curso;
     mapping(string => uint) private notas_materias;
     address private _docente;
-
     string [] private materias;
     
     constructor(string memory nombre_, string memory apellido_, string memory curso_){

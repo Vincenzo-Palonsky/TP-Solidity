@@ -38,7 +38,7 @@ contract Estudiante{
             }
         }
         
-        require(puede == true || msg.sender == _docente, "Solo el owner puede setear poderes");
+        require(puede == true || msg.sender == _docente, "Requieres permisos para setear notas");
         bimestres[bimestre_-1][materia_] = nota_;
         materias[bimestre_].push(materia_);
     }

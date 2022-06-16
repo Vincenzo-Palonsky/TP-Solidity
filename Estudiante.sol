@@ -29,7 +29,7 @@ contract Estudiante{
     }
 
     function set_nota_materias(string memory materia_, uint nota_) public{
-        require(msg.sender == _docente, "Solo el owner puede setear poderes");
+        require(msg.sender == _docente, "Solo el owner puede setear notas");
         bool insertar = true;
         for(uint i=0; i<materias.length; i++){
             if(keccak256(bytes(materia_)) == keccak256(bytes(materias[i]))){

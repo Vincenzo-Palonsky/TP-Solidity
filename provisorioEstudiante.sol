@@ -30,8 +30,20 @@ contract Estudiante{
 
     function set_nota_materias(string memory materia_, uint nota_) public{
         require(msg.sender == _docente, "Solo el owner puede setear poderes");
-        notas_materias[materia_] = nota_;
-        materias.push(materia_);
+        bool insertar = true;
+        for(uint i=0; i<materias.length; i++){
+            if(materia_ == materias[i]){
+                insertar = true;
+            }
+        }
+
+        if(insertar){
+            notas_materias[materia_] = nota_;
+            materias.push(materia_);
+        }
+        else{
+            notas_materias[materia_] = nota_;
+        }
     }
 
     function nota_materia(string memory materia_) public view returns (uint){
@@ -49,13 +61,18 @@ contract Estudiante{
 
     function promedio() public view returns (uint){
         uint _promedio;
-        uint suma;
-        uint largoarray = materias.length;
+        uint _suma;
         
-        for(uint i=0; i<largoarray; i++){
-            suma = suma + notas_materias[materias[i]];
+        if(materias.length == 0){
+            _promedio = 0;
         }
-        _promedio = suma/largoarray;
+        else{
+            for(uint i=0; i<materias.length; i++){
+            _suma = _suma + notas_materias[materias[i]];
+            }
+            _promedio = _suma/materias.length;
+        }
+
         return _promedio;
     }
 }

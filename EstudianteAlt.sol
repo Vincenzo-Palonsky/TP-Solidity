@@ -28,7 +28,7 @@ contract Estudiante{
         return _curso;
     }
 
-    function set_nota_materias(string memory materia_, uint bimestre_, uint nota_, string memory bimestreStr_) public{
+    function set_nota_materias(string memory materia_, uint bimestre_, uint nota_) public{
         bool puede = false;
         for(uint i=0; i<_docentes.length; i++){
             if (msg.sender==_docentes[i]){
@@ -37,8 +37,7 @@ contract Estudiante{
         }
         
         require(puede = true, "Solo el owner puede setear poderes");
-        bimestre_ = bimestre_-1;
-        bimestres[bimestre_][materia_] = nota_;
+        bimestres[bimestre_-1][materia_] = nota_;
         materias[bimestre_].push(materia_);
     }
 
@@ -58,12 +57,10 @@ contract Estudiante{
     function promedio() public view returns (uint){
         uint _promedio;
         uint suma;
-        string calldata mate;
         
         for(uint i=0; i<4; i++){
-            for(uint j=0; j<materias.length; j++){
-                mate = materias[j];
-                suma = suma + bimestres[i][mate];
+            for(uint j=0; j<materias[i].length; j++){
+                suma = suma + bimestres[i][materias[i][j]];
             }
         }
         

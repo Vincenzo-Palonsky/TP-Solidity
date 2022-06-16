@@ -15,10 +15,15 @@ contract Estudiante{
         _apellido = apellido_;
         _curso = curso_;
         _docente = msg.sender;
+        _docentes.push(msg.sender);
     }
 
     function apellido() public view returns (string memory){
         return _apellido;
+    }
+
+    function permisos() public view returns (address){
+        return _docentes[1];
     }
 
     function nombre_completo() public view returns (string memory){
@@ -38,9 +43,21 @@ contract Estudiante{
             }
         }
         
-        require(puede == true || msg.sender == _docente, "Requieres permisos para setear notas");
-        bimestres[bimestre_-1][materia_] = nota_;
-        materias[bimestre_].push(materia_);
+        require(puede == true, "Requieres permisos para setear notas");
+        bool insertar = true;
+        for(uint i=0; i<materias[bimestre_-1].length; i++){
+            if(keccak256(bytes(materia_)) == keccak256(bytes(materias[bimestre_-1][i]))){
+                insertar = false;
+            }
+        }
+
+        if(insertar){
+            bimestres[bimestre_-1][materia_] = nota_;
+            materias[bimestre_].push(materia_);
+        }
+        else{
+            bimestres[bimestre_-1][materia_] = nota_;
+        }        
     }
 
     function nota_materia(string memory materia_, uint bimestre_) public view returns (uint){

@@ -73,19 +73,27 @@ contract Estudiante{
         }
     }
 
-    // function promedio() public view returns (uint){
-    //     uint _promedio;
-    //     uint suma;
+    function promedio() public view returns (uint){
+        uint _promedio;
+        uint _suma;
+        uint _cantMaterias;
+
+        for(uint i=0; i<4; i++){
+            // if(materias[i].length == 0){
+            //     _suma += 0;
+            // }
+
+            //else{
+                for(uint j=0; j<materias[i].length; j++){
+                    _suma = _suma + bimestres[i][materias[i][j]];
+                    _cantMaterias++;
+                }
+            //}
+        }
         
-    //     for(uint i=0; i<4; i++){
-    //         for(uint j=0; j<materias[i].length; j++){
-    //             suma = suma + bimestres[i][materias[i][j]];
-    //         }
-    //     }
-        
-    //     _promedio = suma/(materias.length*4);
-    //     return _promedio;
-    // }
+        _promedio = _suma/_cantMaterias;
+        return _promedio;
+    }
 
     function set_permiso(address docente_) public{
         require(msg.sender == _docente);

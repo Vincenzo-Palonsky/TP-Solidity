@@ -22,10 +22,6 @@ contract Estudiante{
         return _apellido;
     }
 
-    function permisos() public view returns (address){
-        return _docentes[1];
-    }
-
     function nombre_completo() public view returns (string memory){
         return string.concat(_nombre, " ", _apellido);
     }
@@ -53,7 +49,7 @@ contract Estudiante{
 
         if(insertar){
             bimestres[bimestre_-1][materia_] = nota_;
-            materias[bimestre_].push(materia_);
+            materias[bimestre_-1].push(materia_);
         }
         else{
             bimestres[bimestre_-1][materia_] = nota_;
@@ -79,16 +75,16 @@ contract Estudiante{
         uint _cantMaterias;
 
         for(uint i=0; i<4; i++){
-            // if(materias[i].length == 0){
-            //     _suma += 0;
-            // }
+            if(materias[i].length == 0){
+                _suma += 0;
+            }
 
-            //else{
+            else{
                 for(uint j=0; j<materias[i].length; j++){
                     _suma = _suma + bimestres[i][materias[i][j]];
                     _cantMaterias++;
                 }
-            //}
+            }
         }
         
         _promedio = _suma/_cantMaterias;

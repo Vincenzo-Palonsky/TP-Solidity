@@ -9,6 +9,7 @@ contract Estudiante{
     mapping(string => uint)[5] private bimestres;
     string [][5] private materias;
     address [] private _docentes;
+    event registrarNota(address profesor, string materia, uint256 nota);
 
     constructor(string memory nombre_, string memory apellido_, string memory curso_){
         _nombre = nombre_;
@@ -53,7 +54,9 @@ contract Estudiante{
         }
         else{
             bimestres[bimestre_-1][materia_] = nota_;
-        }        
+        }
+
+        emit registrarNota(msg.sender, materia_, nota_); 
     }
 
     function nota_materia(string memory materia_, uint bimestre_) public view returns (uint){

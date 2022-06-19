@@ -16,4 +16,4 @@ event Boletin(string_NombreDocente,string_NombreMateria, uint _nota);
 emit Boletin(_NombreDocente, _NombreMateria,_nota);
 Un evento para nosotros, es una parte de un contrato que almacena datos que se pasan en otros registros anteriores. Estos eventos se usan para mostrar e informar el estado actual del contrato. También nos ayudan a que sepamos cuando hay alguna modificación.
 
-Etherscan EstudianteAlt.sol:
+Etherscan EstudianteAlt.sol: https://etherscan.io/address/0xab889b0862D73B5604032596D572a7926318C07F

@@ -1,6 +1,8 @@
 # TP-Solidity
 Ignacio B. Micaela C. Vincenzo Luca P.
 
+Etherscan Estudiante.sol: https://etherscan.io/address/0xAD3978aFB61188B1198652E20911E57ab78F8A0e
+
 Opcional:
 a. ¿Cómo modificarías el Smart Contract para que acepte notas de 4 bimestres?
 Para que se acepten notas de 4 bimestres, sería necesario hacer un array de int a mappings. Este tendría cuatro posiciones que irían del primer al cuarto bimestre. De esta forma, cada bimestre tendría un mapping que contenga todas las materias, con sus respectivas notas.
@@ -13,3 +15,5 @@ Para incluir el evento para registrar cuando determina una nota, haríamos esto:
 event Boletin(string_NombreDocente,string_NombreMateria, uint _nota);
 emit Boletin(_NombreDocente, _NombreMateria,_nota);
 Un evento para nosotros, es una parte de un contrato que almacena datos que se pasan en otros registros anteriores. Estos eventos se usan para mostrar e informar el estado actual del contrato. También nos ayudan a que sepamos cuando hay alguna modificación.
+
+Etherscan EstudianteAlt.sol:
